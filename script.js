@@ -16,13 +16,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById("masked").onclick = () => {
         modal.style.display = "block";
-        modalText.textContent = "Perfetto, la tua VPN sembra funzionare, puoi procedere!";
+        modalText.textContent = "All right! You VPN looks fine, you can go on!";
         vpnLink.style.display = "none";
     };
 
     document.getElementById("not-masked").onclick = () => {
         modal.style.display = "block";
-        modalText.textContent = "La tua posizione non è mascherata, e scaricare file da Telegram potrebbe essere pericoloso. Controlla che la tua VPN sia ON.";
+        modalText.textContent = "If you are not sure your VPN is hiding you correctly, try turning it back on. If it still doesn't work, just try with the best one on the market:";
         vpnLink.style.display = "inline-block";
     };
 
