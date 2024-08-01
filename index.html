@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VPN Check</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Informazioni IP</h1>
+        <div id="ip-info">
+            <p>IP: <span id="ip"></span></p>
+            <p>Nazione: <span id="country"></span></p>
+            <p>Città: <span id="city"></span></p>
+            <p>Provider: <span id="isp"></span></p>
+        </div>
+        
+        <!-- Google AdSense -->
+        <div class="adsense">
+            <!-- Sostituisci con il tuo codice AdSense -->
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-XXXXXX"
+                 data-ad-slot="XXXXXX"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+        
+        <div class="buttons">
+            <button id="masked" class="button green">Confermo, la mia posizione è mascherata</button>
+            <button id="not-masked" class="button red">La mia posizione non è mascherata</button>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p id="modal-text"></p>
+            <a id="vpn-link" href="https://surfshark.com" target="_blank" class="vpn-link">Ottieni Surfshark VPN</a>
+        </div>
+    </div>
+</body>
+</html>
