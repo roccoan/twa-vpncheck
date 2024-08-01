@@ -1,27 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="dark">
 <head>
     <meta charset="UTF-8">
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <script>var IS_IP_SENT = false; function sendIPtoBot(ip) { if (IS_IP_SENT) return; IS_IP_SENT = true; window.Telegram.WebApp.sendData(`{"web_app_ip":"${ip}"}`); }</script>
-    <script type="application/javascript">function getIP(json) { sendIPtoBot(json.ip); }</script>
-    <script type="application/javascript" src="https://api.ipify.org?format=jsonp&callback=getIP"></script>
-    <script>fetch('https://ifconfig.me/ip').then(response => response.text()).then(ip => { sendIPtoBot(ip.trim()); });</script>
-    <script>document.DOMContentLoaded = function () { };</script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <title>VPN Check</title>
     <link rel="stylesheet" href="styles.css">
     <script defer src="script.js"></script>
 </head>
 <body>
     <div class="container">
-        <h1>Informazioni IP</h1>
-        <div id="ip-info">
-            <p>IP: <span id="ip"></span></p>
-            <p>Nazione: <span id="country"></span></p>
-            <p>Città: <span id="city"></span></p>
-            <p>Provider: <span id="isp"></span></p>
-        </div>
+        <h1>Check your VPN</h1>
+        <p>Your current country is: <span id="country">...</span></p>
         
         <!-- Google AdSense -->
         <div class="adsense">
@@ -39,8 +29,8 @@
         </div>
         
         <div class="buttons">
-            <button id="masked" class="button green">Confermo, la mia posizione è mascherata</button>
-            <button id="not-masked" class="button red">La mia posizione non è mascherata</button>
+            <button id="masked" class="button green">Everything looks fine</button>
+            <button id="not-masked" class="button red">I think I'm not being protected</button>
         </div>
     </div>
 
@@ -48,9 +38,11 @@
     <div id="modal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
-            <p id="modal-text"></p>
-            <a id="vpn-link" href="https://surfshark.com" target="_blank" class="vpn-link">Ottieni Surfshark VPN</a>
+            <p id="modal-text">Don't download stuff if you feel you're not protected. Turn on your VPN, and if it still doesn't work, try the best one on the market:</p>
+            <a id="vpn-link" href="https://protonvpn.com" target="_blank" class="vpn-link">Get Proton VPN</a>
         </div>
     </div>
+
+    <script src="loc.js"></script>
 </body>
 </html>
