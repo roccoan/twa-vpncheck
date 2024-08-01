@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(response => response.json())
         .then(data => {
             document.getElementById('ip').textContent = data.ip;
-            document.getElementById('country').textContent = data.country_name;
+            document.getElementById('relcountry').textContent = data.country_name;
             document.getElementById('city').textContent = data.city;
             document.getElementById('isp').textContent = data.org;
         })
