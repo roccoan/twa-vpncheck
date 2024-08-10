@@ -9,67 +9,49 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <title>VPN Check</title>
     <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
 </head>
 <body>
     <div class="container">
-      <!--Card success-->
-      <div id="successCard" class="card text-bg-success" style="display: none;">
-        <h5 class="card-header"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-check2-circle" viewBox="0 0 16 16">
-        <path d="M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0"/>
-        <path d="M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0z"/>
-      </svg> Everything looks fine!</h5>
-        <div class="card-body">
-          <h5 class="card-title">Your IP says you're in <span id="relcountry">...</span>, but your real country seems to be <span id="country">...</span></h5>
-          <p class="card-text">Your VPN looks like it is working. You can keep downloading!</p>
-        </div>
-      </div>
+        <h1>Your real country is: <span id="country" style="color:red;">...</span></h1>
 
-      <br>
-      
-      <!--Card error-->
-      <div id="errorCard" class="card text-bg-danger" style="display: none;">
-        <h5 class="card-header"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-sign-stop-fill" viewBox="0 0 16 16">
-        <path d="M10.371 8.277v-.553c0-.827-.422-1.234-.987-1.234-.572 0-.99.407-.99 1.234v.553c0 .83.418 1.237.99 1.237.565 0 .987-.408.987-1.237m2.586-.24c.463 0 .735-.272.735-.744s-.272-.741-.735-.741h-.774v1.485z"/>
-        <path d="M4.893 0a.5.5 0 0 0-.353.146L.146 4.54A.5.5 0 0 0 0 4.893v6.214a.5.5 0 0 0 .146.353l4.394 4.394a.5.5 0 0 0 .353.146h6.214a.5.5 0 0 0 .353-.146l4.394-4.394a.5.5 0 0 0 .146-.353V4.893a.5.5 0 0 0-.146-.353L11.46.146A.5.5 0 0 0 11.107 0zM3.16 10.08c-.931 0-1.447-.493-1.494-1.132h.653c.065.346.396.583.891.583.524 0 .83-.246.83-.62 0-.303-.203-.467-.637-.572l-.656-.164c-.61-.147-.978-.51-.978-1.078 0-.706.597-1.184 1.444-1.184.853 0 1.386.475 1.436 1.087h-.645c-.064-.32-.352-.542-.797-.542-.472 0-.77.246-.77.6 0 .261.196.437.553.522l.654.161c.673.164 1.06.487 1.06 1.11 0 .736-.574 1.228-1.544 1.228Zm3.427-3.51V10h-.665V6.57H4.753V6h3.006v.568H6.587Zm4.458 1.16v.544c0 1.131-.636 1.805-1.661 1.805-1.026 0-1.664-.674-1.664-1.805V7.73c0-1.136.638-1.807 1.664-1.807s1.66.674 1.66 1.807ZM11.52 6h1.535c.82 0 1.316.55 1.316 1.292 0 .747-.501 1.289-1.321 1.289h-.865V10h-.665V6.001Z"/>
-      </svg> Woah, hang on a second</h5>
-        <div class="card-body">
-          <h5 class="card-title">Your IP says you're in <span id="relcountry2">...</span>, but your real country seems to be <span id="country2">...</span> as well</h5>
-          <p class="card-text">Try checking or restarting your VPN. <br><br> Don't have a VPN? Take a look at Proton VPN:</p>
-          <a href="https://go.getproton.me/aff_c?offer_id=26&aff_id=8844&source=amisafetg" class="btn btn-light">Yeah, better be safe than sorry <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-suit-heart" viewBox="0 0 16 16">
-        <path d="m8 6.236-.894-1.789c-.222-.443-.607-1.08-1.152-1.595C5.418 2.345 4.776 2 4 2 2.324 2 1 3.326 1 4.92c0 1.211.554 2.066 1.868 3.37.337.334.721.695 1.146 1.093C5.122 10.423 6.5 11.717 8 13.447c1.5-1.73 2.878-3.024 3.986-4.064.425-.398.81-.76 1.146-1.093C14.446 6.986 15 6.131 15 4.92 15 3.326 13.676 2 12 2c-.777 0-1.418.345-1.954.852-.545.515-.93 1.152-1.152 1.595zm.392 8.292a.513.513 0 0 1-.784 0c-1.601-1.902-3.05-3.262-4.243-4.381C1.3 8.208 0 6.989 0 4.92 0 2.755 1.79 1 4 1c1.6 0 2.719 1.05 3.404 2.008.26.365.458.716.596.992a7.6 7.6 0 0 1 .596-.992C9.281 2.049 10.4 1 12 1c2.21 0 4 1.755 4 3.92 0 2.069-1.3 3.288-3.365 5.227-1.193 1.12-2.642 2.48-4.243 4.38z"/>
-      </svg></a>
+        <h2>If your VPN works fine, you should see a different country here:</h2>
+        <div id="ip-info">
+            <p>IP: <span id="ip"></span></p>
+            <p>Country: <span id="relcountry"></span></p>
+            <p>City: <span id="city"></span></p>
+            <p>Internet Provider: <span id="isp"></span></p>
         </div>
-      </div>
+        
+        <!-- Google AdSense -->
+        <!--<div class="adsense">
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-XXXXXX"
+                 data-ad-slot="XXXXXX"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>-->
+        
+        <div class="buttons">
+            <button id="masked" class="button green">Everything looks fine</button>
+            <button id="not-masked" class="button red">I think I'm not being protected</button>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p id="modal-text">Don't download stuff if you feel you're not protected. Turn on your VPN, and if it still doesn't work, try the best one on the market:</p>
+            <a id="vpn-link" href="https://go.getproton.me/aff_c?offer_id=26&aff_id=8844" target="_blank" class="vpn-link">Get Proton VPN</a>
+        </div>
     </div>
 
     <script src="loc.js"></script>
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      let checkInterval = setInterval(function() {
-        let realCountry = document.getElementById('country');
-        let ipCountry = document.getElementById('relcountry');
-        
-        if (realCountry && ipCountry && realCountry.textContent !== '...' && ipCountry.textContent !== '...') {
-          clearInterval(checkInterval);
-          checkCountries();
-        }
-      }, 100);
-    });
-
-    function checkCountries() {
-      let realCountry = document.getElementById('country').textContent;
-      let ipCountry = document.getElementById('relcountry').textContent;
-      
-      if (realCountry === ipCountry) {
-        document.getElementById('errorCard').style.display = 'block';
-        document.getElementById('successCard').style.display = 'none';
-        document.getElementById('country2').textContent = realCountry;
-        document.getElementById('relcountry2').textContent = ipCountry;
-      } else {
-        document.getElementById('successCard').style.display = 'block';
-        document.getElementById('errorCard').style.display = 'none';
-      }
-    }
-    </script>
 </body>
 </html>
