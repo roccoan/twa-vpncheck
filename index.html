@@ -9,7 +9,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <title>VPN Check</title>
     <link rel="stylesheet" href="styles.css">
-    <script defer src="script.js"></script>
 </head>
 <body>
     <div class="container">
@@ -45,6 +44,18 @@
 
     <script src="loc.js"></script>
     <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      let checkInterval = setInterval(function() {
+        let realCountry = document.getElementById('country');
+        let ipCountry = document.getElementById('relcountry');
+        
+        if (realCountry && ipCountry && realCountry.textContent !== '...' && ipCountry.textContent !== '...') {
+          clearInterval(checkInterval);
+          checkCountries();
+        }
+      }, 100);
+    });
+
     function checkCountries() {
       let realCountry = document.getElementById('country').textContent;
       let ipCountry = document.getElementById('relcountry').textContent;
@@ -59,14 +70,6 @@
         document.getElementById('errorCard').style.display = 'none';
       }
     }
-
-    // Esegui il controllo quando i dati sono caricati
-    // Questo dipende da come viene popolato il contenuto dei campi country e relcountry
-    // Potresti dover modificare questo in base alla tua implementazione specifica
-    window.onload = function() {
-      // Attendiamo un breve momento per assicurarci che i dati siano caricati
-      setTimeout(checkCountries, 1000);
-    };
     </script>
 </body>
 </html>
