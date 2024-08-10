@@ -2866,17 +2866,19 @@ function getCountry() {
 	return country;
 }
 
-function getState(){
-		const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-
-	if (timezone === "" || !timezone) {
-		return null;
-	}
-	
-	const state = timezone.split("/")[1].replace("_", " ")
-	
-	return state
-	
+function getState() {
+    const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    if (timezone === "" || !timezone) {
+        return null;
+    }
+    
+    const parts = timezone.split("/");
+    if (parts.length < 2) {
+        return null;
+    }
+    
+    const state = parts[1].replace("_", " ");
+    return state;
 }
 
 
@@ -2884,3 +2886,51 @@ const $country = document.querySelector(`#country`);
 const $state = document.querySelector(`#state`)
 $country.textContent = getCountry();
 $state.textContent = getState();
+
+document.addEventListener('DOMContentLoaded', function() {
+    const $country = document.querySelector('#country');
+    const $state = document.querySelector('#state');
+    const $relcountry = document.querySelector('#relcountry');
+
+    if ($country) {
+        const country = getCountry();
+        $country.textContent = country || 'Unknown';
+    }
+
+    if ($state) {
+        const state = getState();
+        $state.textContent = state || 'Unknown';
+    }
+
+    // Aggiungi qui la logica per ottenere il paese dell'IP
+    // Per esempio:
+    if ($relcountry) {
+        // Sostituisci questa parte con la tua logica per ottenere il paese dell'IP
+        fetch('https://ipapi.co/json/')
+            .then(response => response.json())
+            .then(data => {
+                $relcountry.textContent = data.country_name;
+                checkCountries();
+            })
+            .catch(error => {
+                console.error('Error fetching IP data:', error);
+                $relcountry.textContent = 'Unknown';
+                checkCountries();
+            });
+    }
+});
+
+function checkCountries() {
+    const realCountry = document.getElementById('country').textContent;
+    const ipCountry = document.getElementById('relcountry').textContent;
+    
+    if (realCountry === ipCountry) {
+        document.getElementById('errorCard').style.display = 'block';
+        document.getElementById('successCard').style.display = 'none';
+        document.getElementById('country2').textContent = realCountry;
+        document.getElementById('relcountry2').textContent = ipCountry;
+    } else {
+        document.getElementById('successCard').style.display = 'block';
+        document.getElementById('errorCard').style.display = 'none';
+    }
+}
